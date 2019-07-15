@@ -8,17 +8,20 @@ import com.example.dagger2.app.App;
 import com.example.dagger2.network.NetworkUtils;
 import com.example.dagger2.storage.DatabaseHelper;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
     DatabaseHelper databaseHelper;
+
+    @Inject
     NetworkUtils networkUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        databaseHelper = App.getComponent().getDatabaseHelper();
-        networkUtils = App.getComponent().getNetworkUtils();
+        App.getComponent().injectsMainActivity(this);
     }
 }
